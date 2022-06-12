@@ -4,7 +4,7 @@ import Hero from "./../../../assets/icons/hero.svg";
 import Villain from "./../../../assets/icons/villain.svg";
 import AntiHero from "./../../../assets/icons/antihero.svg";
 import Alien from "./../../../assets/icons/alien.svg";
-import Human from "./../../../assets/icons/alien.svg";
+import Human from "./../../../assets/icons/human.svg";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./styles";
@@ -87,16 +87,11 @@ const Icons = (props: any) => {
 export function Categories() {
   return (
     <View style={styles.container}>
-      <Text style={styles.welcome}>Bem vindo ao Marvel Heroes</Text>
-      <Text style={styles.title}>Escolha o seu personagem</Text>
+      <Text style={styles.title}>Welcome to Marvel Native</Text>
       <View style={styles.categoriesWrapper}>
         {nodes.map((E: CategoriesNodesProps, idx: number) => {
           return (
-            <TouchableOpacity
-              key={idx}
-              onPress={E.action}
-              style={styles.categoriesButton}
-            >
+            <View key={idx} style={styles.categoriesButton}>
               <LinearGradient
                 colors={[E.gradient.from, E.gradient.to]}
                 start={{ x: 0, y: 0 }}
@@ -105,8 +100,7 @@ export function Categories() {
               >
                 <Icons icon={E.icon} />
               </LinearGradient>
-            </TouchableOpacity>
-            // <Text>{E.bg}</Text>
+            </View>
           );
         })}
       </View>

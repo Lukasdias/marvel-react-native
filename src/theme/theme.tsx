@@ -8,14 +8,12 @@ export const theme = {
       fontFamily: "Gilroy",
     },
     homeTitle: {
-      fontSize: 32,
-      fontWeight: "900",
-      fontFamily: "Gilroy",
+      fontSize: 42,
+      fontFamily: "Gilroy-Heavy",
     },
     cardTitle: {
       fontSize: 20,
-      fontWeight: "900",
-      fontFamily: "Gilroy",
+      fontFamily: "Gilroy-Heavy",
     },
     sectionTitle: {
       fontSize: 16,

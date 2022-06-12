@@ -11,7 +11,7 @@ export function Header() {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
-        <Menu width={24} height={24} />
+        <Menu width={24} height={24} fill={"#000"} />
       </TouchableOpacity>
       <TouchableOpacity>
         <Marvel fill={theme.colors.primary.red} width={71} height={26} />
