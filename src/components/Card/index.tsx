@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 
 import { CharacterProps } from "../../utils/character";
@@ -6,49 +6,39 @@ import { ComicsProps } from "../../utils/comics";
 import { CreatorProps } from "../../utils/creator";
 
 import { styles } from "./styles";
+import { Skeleton } from "moti/skeleton";
+import { dataStore } from "../../stores/dataStore";
 
 interface CardProps {
-  character?: CharacterProps;
-  comics?: ComicsProps;
-  creators?: CreatorProps;
+  type: "characters" | "creators" | "comics";
+  element: CharacterProps | ComicsProps | CreatorProps;
 }
 
-export function Card({ ...props }: CardProps) {
+function Card({ ...props }: CardProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
   return (
     <>
-      {props.character && (
-        <TouchableOpacity style={styles.container}>
-          <Image
-            source={{
-              uri: `${props.character.thumbnail.path}.${props.character.thumbnail.extension}`,
-            }}
-            style={styles.image}
-          />
-          <Text style={styles.name}>{props.character.name}</Text>
-        </TouchableOpacity>
-      )}
-      {props.comics && (
-        <TouchableOpacity style={styles.container}>
-          <Image
-            source={{
-              uri: `${props.comics.thumbnail.path}.${props.comics.thumbnail.extension}`,
-            }}
-            style={styles.image}
-          />
-          <Text style={styles.name}>{props.comics.title}</Text>
-        </TouchableOpacity>
-      )}
-      {props.creators && (
-        <TouchableOpacity style={styles.container}>
-          <Image
-            source={{
-              uri: `${props.creators.thumbnail.path}.${props.creators.thumbnail.extension}`,
-            }}
-            style={styles.image}
-          />
-          <Text style={styles.name}>{props.creators.fullName}</Text>
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity style={styles.container}>
+        <Skeleton show={isLoading} colorMode="light" radius={30}>
+          <>
+            <Image
+              source={{
+                uri: `${props.element.thumbnail.path}.${props.element.thumbnail.extension}`,
+              }}
+              style={styles.image}
+            />
+            <Text numberOfLines={1} style={styles.name}>
+              {props.element.name}
+            </Text>
+          </>
+        </Skeleton>
+      </TouchableOpacity>
     </>
   );
 }
+
+export default memo(Card);

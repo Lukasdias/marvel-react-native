@@ -20,8 +20,4 @@ export const styles = StyleSheet.create({
     color: theme.colors.primary.grey,
     ...theme.typography.homeSubtitle,
   },
-  cards: {
-    // flexDirection: "row",
-    // paddingHorizontal: 20,
-  },
 });

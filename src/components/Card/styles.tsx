@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 25,
   },
   image: {
@@ -13,12 +15,12 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
   },
   name: {
-    position: "absolute",
-    bottom: 0,
-    backgroundColor: theme.colors.primary.dark,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     color: theme.colors.primary.red,
-    ...theme.typography.profileSubtitle,
-    width: "100%",
+    maxWidth: 200,
+    fontSize: 20,
+    fontFamily: "Gilroy-Heavy",
     padding: 8,
   },
 });

@@ -3,11 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Home } from "./src/pages/home/index";
-import { Other } from "./src/pages/other/index";
+import { Wiki } from "./src/pages/wiki/index";
 import { useFonts } from "expo-font";
-import { Dimensions } from "react-native";
-import { useEffect } from "react";
-import { dataStore } from "./src/stores/dataStore";
 
 export default function App() {
   const [loaded] = useFonts({
@@ -37,8 +34,8 @@ export default function App() {
           />
           <Stack.Screen
             options={{ headerShown: false }}
-            name="Other"
-            component={Other}
+            name="Wiki"
+            component={Wiki}
           />
         </Stack.Navigator>
       </NavigationContainer>

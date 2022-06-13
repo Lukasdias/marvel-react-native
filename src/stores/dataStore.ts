@@ -18,6 +18,9 @@ interface Store {
   characters: CharacterProps[];
   creators: CreatorProps[];
   comics: ComicsProps[];
+  isFetchingCharacters: boolean;
+  isFetchingComics: boolean;
+  isFetchingCreators: boolean;
   fetchAll: () => void;
   fetchCharacters: () => void;
   fetchComics: () => void;
@@ -31,6 +34,9 @@ export const dataStore = create<Store>((set, get) => ({
   characters: [],
   creators: [],
   comics: [],
+  isFetchingCharacters: true,
+  isFetchingComics: true,
+  isFetchingCreators: true,
   fetchAll: async () => {
     try {
       // const responseComics: any = await axios.get(
@@ -107,16 +113,23 @@ export const dataStore = create<Store>((set, get) => ({
           !e.thumbnail.path.includes("image_not_available") &&
           !e.thumbnail.extension.includes("gif")
       );
-      console.log(cleanCharacters);
+      // console.log(cleanCharacters);
       set((state) => ({
         characters: [...state.characters, ...cleanCharacters],
       }));
     } catch (error) {
       console.log(error);
       return null;
+    } finally {
+      set((state) => ({
+        isFetchingCharacters: state.isFetchingCharacters,
+      }));
     }
   },
   fetchCreators: async () => {
+    set(() => ({
+      isFetchingComics: true,
+    }));
     try {
       const response: any = await axios.get(
         `${BASE_URL}/creators?orderBy=suffix&limit=${get().limit}&offset=${
@@ -124,11 +137,11 @@ export const dataStore = create<Store>((set, get) => ({
         }&ts=${TS}&apikey=${PUBLIC_KEY}&hash=${HASH}`
       );
       const mappedCreators: CreatorProps[] = response.data.data.results.map(
-        (elem: CreatorProps) => {
+        (elem: any) => {
           return {
             id: elem.id,
             suffix: elem.suffix,
-            fullName: elem.fullName,
+            name: elem.fullName,
             thumbnail: elem.thumbnail,
             description: elem.description,
             comics: elem.comics,
@@ -140,16 +153,23 @@ export const dataStore = create<Store>((set, get) => ({
           !e.thumbnail.path.includes("image_not_available") &&
           !e.thumbnail.extension.includes("gif")
       );
-      console.log(cleanCreators);
+      // console.log(cleanCreators);
       set((state) => ({
         creators: [...state.creators, ...cleanCreators],
       }));
     } catch (error) {
       console.log(error);
       return null;
+    } finally {
+      set((state) => ({
+        isFetchingComics: false,
+      }));
     }
   },
   fetchComics: async () => {
+    set((state) => ({
+      isFetchingComics: true,
+    }));
     try {
       const response: any = await axios.get(
         `${BASE_URL}/comics?orderBy=title&limit=${get().limit}&offset=${
@@ -157,10 +177,10 @@ export const dataStore = create<Store>((set, get) => ({
         }&ts=${TS}&apikey=${PUBLIC_KEY}&hash=${HASH}`
       );
       const mappedComics: ComicsProps[] = response.data.data.results.map(
-        (elem: ComicsProps) => {
+        (elem: any) => {
           return {
             id: elem.id,
-            title: elem.title,
+            name: elem.title,
             thumbnail: elem.thumbnail,
             description: elem.description,
             creators: elem.creators,
@@ -173,13 +193,17 @@ export const dataStore = create<Store>((set, get) => ({
           !e.thumbnail.path.includes("image_not_available") &&
           !e.thumbnail.extension.includes("gif")
       );
-      console.log(cleanComics);
+      // console.log(cleanComics);
       set((state) => ({
         comics: [...state.comics, ...cleanComics],
       }));
     } catch (error) {
       console.log(error);
       return null;
+    } finally {
+      set((state) => ({
+        isFetchingComics: false,
+      }));
     }
   },
   increaseOffset: () => {

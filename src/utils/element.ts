@@ -1,5 +1,4 @@
-import { ComicsProps } from "./comics";
-export type CharacterProps = {
+interface ElementProps {
   id: number;
   name: string;
   description: string;
@@ -7,5 +6,4 @@ export type CharacterProps = {
     extension: string;
     path: string;
   };
-  comics: ComicsProps[];
-};
+}
