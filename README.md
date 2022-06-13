@@ -21,9 +21,7 @@ Criar um aplicativo listando os personagens da Marvel, com suas informações, h
 ## Dados
 API na Marvel, dá uma olhadinha na documentação: https://developer.marvel.com/
 
-### Exemplo de chamada da API
-- [http://gateway.marvel.com/v1/public/comics?ts=lukas&apikey=48ae307ad0fea1e6adec5d1424d6a7e1&hash=cf4f2477059eb9e19788399960f07c04](http://gateway.marvel.com/v1/public/comics?ts=lukas&apikey=48ae307ad0fea1e6adec5d1424d6a7e1&hash=cf4f2477059eb9e19788399960f07c04)
-### Parametros
+### Parametros API
 - TS ou Timestamp ou string qualquer
 - APIKEY
   - Chave pública que você recebe quando faz login no site  
