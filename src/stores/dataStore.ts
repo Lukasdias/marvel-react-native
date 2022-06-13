@@ -132,7 +132,7 @@ export const dataStore = create<Store>((set, get) => ({
     }));
     try {
       const response: any = await axios.get(
-        `${BASE_URL}/creators?orderBy=suffix&limit=${get().limit}&offset=${
+        `${BASE_URL}/creators?orderBy=firstName&limit=${get().limit}&offset=${
           get().offset
         }&ts=${TS}&apikey=${PUBLIC_KEY}&hash=${HASH}`
       );
@@ -140,7 +140,6 @@ export const dataStore = create<Store>((set, get) => ({
         (elem: any) => {
           return {
             id: elem.id,
-            suffix: elem.suffix,
             name: elem.fullName,
             thumbnail: elem.thumbnail,
             description: elem.description,

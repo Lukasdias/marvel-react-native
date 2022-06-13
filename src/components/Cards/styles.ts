@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     color: theme.colors.primary.red,
     fontFamily: "Gilroy-Heavy",
     fontSize: 18,
+    textTransform: "capitalize",
   },
   seeMore: {
     color: theme.colors.primary.grey,

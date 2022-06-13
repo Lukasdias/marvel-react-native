@@ -41,4 +41,4 @@ function Card({ ...props }: CardProps) {
   );
 }
 
-export default memo(Card);
+export default Card;

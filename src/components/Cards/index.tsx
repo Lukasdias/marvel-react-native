@@ -26,7 +26,7 @@ function Cards({ ...props }: CardProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Characters</Text>
+        <Text style={styles.headerText}>{props.type}</Text>
         <Text style={styles.seeMore} onPress={() => console.log("See more")}>
           See more...
         </Text>
